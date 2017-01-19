@@ -69,33 +69,33 @@ def pick3(request):
 
 @api_view()
 def pick4(request):
-    games = Pick4.objects.all()
-    games_serializer = Pick4Serializer(games, many=True)
+    queryset = filter_queryset(request, Pick4)
+    games_serializer = Pick4Serializer(queryset, many=True)
     return JSONResponse(games_serializer.data)
 
 
 @api_view()
 def cash5(request):
-    games = Cash5.objects.all()
-    games_serializer = Cash5Serializer(games, many=True)
+    queryset = filter_queryset(request, Cash5)
+    games_serializer = Cash5Serializer(queryset, many=True)
     return JSONResponse(games_serializer.data)
 
 
 @api_view()
 def powerball(request):
-    games = PowerBall.objects.all()
-    games_serializer = PowerBallSerializer(games, many=True)
+    queryset = filter_queryset(request, PowerBall)
+    games_serializer = PowerBallSerializer(queryset, many=True)
     return JSONResponse(games_serializer.data)
 
 
 @api_view()
 def mega_millions(request):
-    games = MegaMillions.objects.all()
-    games_serializer = MegaMillionsSerializer(games, many=True)
+    queryset = filter_queryset(request, MegaMillions)
+    games_serializer = MegaMillionsSerializer(queryset, many=True)
     return JSONResponse(games_serializer.data)
 
 @api_view()
 def lucky_for_life(request):
-    games = LuckyForLife.objects.all()
-    games_serializer = LuckyForLifeSerializer(games, many=True)
+    queryset = filter_queryset(request, LuckyForLife)
+    games_serializer = LuckyForLifeSerializer(queryset, many=True)
     return JSONResponse(games_serializer.data)
