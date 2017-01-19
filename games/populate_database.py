@@ -17,6 +17,15 @@ import wget
 from termcolor import colored
 from bs4 import BeautifulSoup
 
+GAMES = {
+        'pick3_day': 'http://www.lotteryusa.com/north-carolina/midday-3/year',
+        'pick3_evening': 'http://www.lotteryusa.com/north-carolina/pick-3/year',
+        'pick4_day': 'http://www.lotteryusa.com/north-carolina/midday-pick-4/year',
+        'pick4_evening': 'http://www.lotteryusa.com/north-carolina/pick-4/year',
+        'cash5': 'http://www.lotteryusa.com/north-carolina/cash-5/year',
+        'lucky_4_life': 'http://www.lotteryusa.com/north-carolina/lucky-4-life/year'
+}
+
 logger = logging.getLogger(__file__)
 logging.basicConfig(level=logging.ERROR and logging.INFO)
 
@@ -327,23 +336,14 @@ def lucky_4_life(url):
 
 
 def populate_database():
-    games = {
-        'pick3_day': 'http://www.lotteryusa.com/north-carolina/midday-3/year',
-        'pick3_evening': 'http://www.lotteryusa.com/north-carolina/pick-3/year',
-        'pick4_day': 'http://www.lotteryusa.com/north-carolina/midday-pick-4/year',
-        'pick4_evening': 'http://www.lotteryusa.com/north-carolina/pick-4/year',
-        'cash5': 'http://www.lotteryusa.com/north-carolina/cash-5/year',
-        'lucky_4_life': 'http://www.lotteryusa.com/north-carolina/lucky-4-life/year'
-    }
-
-    pick3(games['pick3_day'], 'day')
-    pick3(games['pick3_evening'], 'evening')
-    pick4(games['pick4_day'], 'day')
-    pick4(games['pick4_evening'], 'evening')
-    cash5(games['cash5'])
+    pick3(GAMES['pick3_day'], 'day')
+    pick3(GAMES['pick3_evening'], 'evening')
+    pick4(GAMES['pick4_day'], 'day')
+    pick4(GAMES['pick4_evening'], 'evening')
+    cash5(GAMES['cash5'])
     powerball()
     mega_millions()
-    lucky_4_life(games['lucky_4_life'])
+    lucky_4_life(GAMES['lucky_4_life'])
 
 
-populate_database()
+# populate_database()
