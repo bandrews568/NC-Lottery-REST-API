@@ -93,8 +93,7 @@ def all_games(request):
 def pick3(request):
     queryset = filter_queryset(request, Pick3)
     games_serializer = Pick3Serializer(queryset, many=True)
-    test = [games_serializer]
-    return JSONResponse(x.data for x in test)
+    return JSONResponse(games_serializer.data)
 
 
 @api_view()
