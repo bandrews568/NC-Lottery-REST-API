@@ -61,10 +61,40 @@ def filter_queryset(request, model):
 
 
 @api_view()
+def all_games(request):
+    # TODO: fix this later!
+    pick3 = Pick3.objects.all().last()
+    pick4 = Pick4.objects.all().last()
+    cash5 = Cash5.objects.all().last()
+    powerball = PowerBall.objects.all().last()
+    mega_millions = MegaMillions.objects.all().last()
+    lucky_for_life = LuckyForLife.objects.all().last()
+
+    pick3_data = Pick3Serializer(pick3, many=False)
+    pick4_data = Pick4Serializer(pick4, many=False)
+    cash5_data = Cash5Serializer(cash5, many=False)
+    powerball_data = PowerBallSerializer(powerball, many=False)
+    mega_millions_data = MegaMillionsSerializer(mega_millions, many=False)
+    lucky_for_life_data = LuckyForLifeSerializer(lucky_for_life, many=False)
+
+    data_list = [
+        pick3_data,
+        pick4_data,
+        cash5_data,
+        powerball_data,
+        mega_millions_data,
+        lucky_for_life_data
+    ]
+    return JSONResponse(game.data for game in data_list)
+
+
+
+@api_view()
 def pick3(request):
     queryset = filter_queryset(request, Pick3)
     games_serializer = Pick3Serializer(queryset, many=True)
-    return JSONResponse(games_serializer.data)
+    test = [games_serializer]
+    return JSONResponse(x.data for x in test)
 
 
 @api_view()
