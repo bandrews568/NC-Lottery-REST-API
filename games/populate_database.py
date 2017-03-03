@@ -136,11 +136,7 @@ def pick4(url, time):
                          .format(time))
 
     for time, date, numbers in pick4_list:
-        row_data = Pick4()
-        row_data.drawing_time = time
-        row_data.drawing_date = date
-        row_data.drawing_numbers = numbers
-        row_data.save()
+        write_to_database(date, numbers, Pick4, time=time)
 
     # Data formats
     # ('D', u'2016-11-02', u'0,5,1,0')
@@ -179,11 +175,8 @@ def cash5(url):
     cash5_list = zip(date_list, number_list, jackpot_list)
 
     for date, numbers, jackpot in cash5_list:
-        row_data = Cash5()
-        row_data.drawing_date = date
-        row_data.drawing_numbers = numbers
-        row_data.jackpot = jackpot
-        row_data.save()
+        write_to_database(date, numbers, Cash5, jackpot=jackpot)
+
     # Data format
     # (u'2016-11-02', u'2,24,29,33,38', u'100000')
     logger.info(color_success + "Cash 5")
@@ -240,11 +233,8 @@ def powerball():
     del powerball_list[0]
 
     for date, numbers, powerball in powerball_data:
-        row_data = PowerBall()
-        row_data.drawing_date = date
-        row_data.drawing_numbers = numbers
-        row_data.powerball = powerball
-        row_data.save()
+        write_to_database(date, numbers, PowerBall, powerball=powerball)
+
     # Data format
     # ('2016-11-02', '18,54,61,13,37,05', '2')
     logger.info(color_success + "Powerball")
@@ -286,13 +276,9 @@ def mega_millions():
         data = (date, numbers, megaball, multiplier)
         mm_list.append(data)
 
-    for date, numbers, megaball, multiplier in mm_list:
-        row_data = MegaMillions()
-        row_data.drawing_date = date
-        row_data.drawing_numbers = numbers
-        row_data.megaball = megaball
-        row_data.multiplier = multiplier
-        row_data.save()
+    for date, numbers, megaball in mm_list:
+        write_to_database(date, numbers, Cash5, megaball=megaball)
+
     # Data format
     # (u'2016-11-01', u'19,24,31,39,45', '03', '05')
     logger.info(color_success + "Mega Millions")
@@ -325,10 +311,8 @@ def lucky_4_life(url):
     lucky_list = zip(date_list, number_list)
 
     for date, numbers in lucky_list:
-        row_data = LuckyForLife()
-        row_data.drawing_date = date
-        row_data.drawing_numbers = numbers
-        row_data.save()
+        write_to_database(date, numbers, LuckyForLife)
+
     # Data format
     # (u'2016-11-01', u'3,4,12,32,45,5')
     logger.info(color_success + "Lucky For Life")
