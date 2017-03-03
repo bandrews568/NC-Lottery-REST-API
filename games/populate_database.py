@@ -13,6 +13,8 @@ from .models import (Pick3, Pick4, Cash5,
                      PowerBall, MegaMillions,
                      LuckyForLife)
 
+from daily_populate_database import write_to_database
+
 import wget
 from termcolor import colored
 from bs4 import BeautifulSoup
@@ -96,11 +98,8 @@ def pick3(url, time):
                          .format(time))
 
     for time, date, numbers in pick3_list:
-        row_data = Pick3()
-        row_data.drawing_time = time
-        row_data.drawing_date = date
-        row_data.drawing_numbers = numbers
-        row_data.save()
+        write_to_database(date, numbers, Pick3, time=time)
+
     # Data formats
     # ('D', u'2016-11-02, u'4,0,4')
     # ('E', u'2016-11-02', u'2,4,5')
