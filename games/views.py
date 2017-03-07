@@ -50,8 +50,9 @@ def filter_queryset(request, model):
     if numbers:
         queryset = queryset.filter(drawing_numbers__contains=numbers)
 
-    if model == Pick3 or model == Pick4 and time:
-        queryset = queryset.filter(drawing_time=time)
+    if model == Pick3 or model == Pick4:
+        if time:
+            queryset = queryset.filter(drawing_time=time)
 
     if limit is not None:
         limit = int(limit)
@@ -87,7 +88,6 @@ def all_games(request):
     return JSONResponse(serialized_data)
 
 
-
 @api_view()
 def pick3(request):
     queryset = filter_queryset(request, Pick3)
@@ -121,6 +121,7 @@ def mega_millions(request):
     queryset = filter_queryset(request, MegaMillions)
     games_serializer = MegaMillionsSerializer(queryset, many=True)
     return JSONResponse(games_serializer.data)
+
 
 @api_view()
 def lucky_for_life(request):
