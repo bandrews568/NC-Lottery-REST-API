@@ -57,6 +57,7 @@ def write_to_database(date, numbers, model, **kwargs):
     time = kwargs.get('time', None)
     jackpot = kwargs.get('jackpot', None)
     _powerball = kwargs.get('powerball', None)
+    powerplay = kwargs.get('powerplay', None)
     megaball = kwargs.get('megaball', None)
     multiplier = kwargs.get('multiplier', None)
 
@@ -69,6 +70,7 @@ def write_to_database(date, numbers, model, **kwargs):
         row_data.jackpot = jackpot
 
     if powerball and model == PowerBall:
+        row_data.powerplay = powerplay
         row_data.powerball = _powerball
 
     if megaball and multiplier and model == MegaMillions:

@@ -200,6 +200,7 @@ def powerball():
     date_list = []
     number_list = []
     powerball_list = []
+    powerplay_list = []
 
     try:
         # Data structures:
@@ -219,21 +220,23 @@ def powerball():
                     logger.error(color_error + "(Powerball): {}".format(line))
                     continue
                 raw_number_data = line[11:].strip().split("  ")
+                powerplay = raw_number_data.pop(-1) if len(raw_number_data) == 7 else None
                 powerball = raw_number_data.pop(-1)
                 number_data = ','.join(raw_number_data)
                 date_list.append(date)
                 number_list.append(number_data)
                 powerball_list.append(powerball)
+                powerplay_list.append(powerplay)
     except IOError:
         logger.error(color_error + "opening: {}".format(filename))
         return
 
-    powerball_data = zip(date_list, number_list, powerball_list)
+    powerball_data = zip(date_list, number_list, powerball_list, powerplay_list)
     # Deleting: ('Draw Date ', ['WB1 WB2 WB3 WB4 WB5 PB', 'PP'])
     del powerball_list[0]
 
-    for date, numbers, powerball in powerball_data:
-        write_to_database(date, numbers, PowerBall, powerball=powerball)
+    for date, numbers, powerball, powerplay in powerball_data:
+        write_to_database(date, numbers, PowerBall, powerball=powerball, powerplay=powerplay)
 
     # Data format
     # ('2016-11-02', '18,54,61,13,37,05', '2')

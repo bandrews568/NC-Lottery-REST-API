@@ -13,6 +13,7 @@ class Pick3Serializer(serializers.ModelSerializer):
                   'drawing_numbers')
 
 
+
 class Pick4Serializer(serializers.ModelSerializer):
     class Meta:
         model = Pick4

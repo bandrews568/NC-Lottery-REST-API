@@ -28,6 +28,7 @@ class PowerBall(models.Model):
     drawing_date = models.DateField()
     drawing_numbers = models.CommaSeparatedIntegerField(max_length=100)
     powerball = models.IntegerField()
+    powerplay = models.IntegerField()
 
 
 class MegaMillions(models.Model):
