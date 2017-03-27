@@ -28,6 +28,7 @@ def filter_queryset(request, model):
     year = request.GET.get('year', None)
     numbers = request.GET.get('numbers', None)
     time = request.GET.get('time', None)
+    powerball = request.GET.get('powerball', None)
 
     queryset = model.objects.all()
 
@@ -53,6 +54,9 @@ def filter_queryset(request, model):
     if model == Pick3 or model == Pick4:
         if time:
             queryset = queryset.filter(drawing_time=time)
+
+    if model == PowerBall and powerball:
+        queryset = queryset.filter(powerball=powerball)
 
     if limit is not None:
         limit = int(limit)
