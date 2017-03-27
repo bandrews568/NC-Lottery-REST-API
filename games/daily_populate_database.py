@@ -4,8 +4,8 @@ import re
 from time import strptime
 from datetime import datetime
 
-from .populate_database import (cash5, powerball,
-                                mega_millions, GAMES)
+# from .populate_database import (cash5, powerball,
+#                                 mega_millions, GAMES)
 from .models import (Pick3, Pick4, Cash5,
                      PowerBall, MegaMillions,
                      LuckyForLife)
@@ -69,7 +69,7 @@ def write_to_database(date, numbers, model, **kwargs):
     if jackpot and model == Cash5:
         row_data.jackpot = jackpot
 
-    if powerball and model == PowerBall:
+    if _powerball and model == PowerBall:
         row_data.powerplay = powerplay
         row_data.powerball = _powerball
 
@@ -120,7 +120,7 @@ def scrape_rss():
             data = format_data(summary, title)
             write_to_database(data[0], data[1], LuckyForLife)
 
-scrape_rss()
-cash5(GAMES['cash5'])
-powerball()
-mega_millions()
+# scrape_rss()
+# cash5(GAMES['cash5'])
+# powerball()
+# mega_millions()

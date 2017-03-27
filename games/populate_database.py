@@ -13,7 +13,7 @@ from .models import (Pick3, Pick4, Cash5,
                      PowerBall, MegaMillions,
                      LuckyForLife)
 
-from daily_populate_database import write_to_database
+from .daily_populate_database import write_to_database
 
 import wget
 from termcolor import colored
@@ -268,6 +268,7 @@ def mega_millions():
     mm_list = []
 
     for line in json_data:
+        print(line)
         date = line['draw_date']
         # Take out the time: 2007-05-11T00:00:00.000
         date = re.sub('T\d\d:\d\d:00\.000', '', date)
@@ -279,8 +280,8 @@ def mega_millions():
         data = (date, numbers, megaball, multiplier)
         mm_list.append(data)
 
-    for date, numbers, megaball in mm_list:
-        write_to_database(date, numbers, Cash5, megaball=megaball)
+    for date, numbers, megaball, multiplier in mm_list:
+        write_to_database(date, numbers, MegaMillions, megaball=megaball, multiplier=multiplier)
 
     # Data format
     # (u'2016-11-01', u'19,24,31,39,45', '03', '05')
@@ -332,4 +333,4 @@ def populate_database():
     lucky_4_life(GAMES['lucky_4_life'])
 
 
-# populate_database()
+populate_database()

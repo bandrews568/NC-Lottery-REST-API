@@ -35,7 +35,8 @@ class PowerBallSerializer(serializers.ModelSerializer):
         model = PowerBall
         fields = ('drawing_date',
                   'drawing_numbers',
-                  'powerball')
+                  'powerball',
+                  'powerplay')
 
 
 class MegaMillionsSerializer(serializers.ModelSerializer):
