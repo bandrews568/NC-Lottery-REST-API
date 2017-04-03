@@ -29,6 +29,7 @@ def filter_queryset(request, model):
     numbers = request.GET.get('numbers', None)
     time = request.GET.get('time', None)
     powerball = request.GET.get('powerball', None)
+    megaball = request.GET.get('megaball', None)
 
     queryset = model.objects.all()
 
@@ -57,6 +58,9 @@ def filter_queryset(request, model):
 
     if model == PowerBall and powerball:
         queryset = queryset.filter(powerball=powerball)
+
+    if model == MegaMillions and megaball:
+        queryset = queryset.filter(megaball=megaball)
 
     if limit is not None:
         limit = int(limit)

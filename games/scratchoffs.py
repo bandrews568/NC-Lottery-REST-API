@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 
 all_games_url = "http://www.nc-educationlottery.org/instant.aspx?"
 
+
 def getGameLinks(url):
     request_page = makesoup(url)
     game_urls = request_page.find_all

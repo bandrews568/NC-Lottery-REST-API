@@ -42,8 +42,8 @@ def makesoup(url):
         to return a soup object.
     """
     try:
-        req = urllib.request.Request(url)
-        page = urllib.request.urlopen(req)
+        request = urllib.request.Request(url)
+        page = urllib.request.urlopen(request)
         soup = BeautifulSoup(page.read(), 'html.parser')
     except urllib.error.HTTPError as e:
         logger.error(color_error + "{} Response: {}".format(e.code, url))
